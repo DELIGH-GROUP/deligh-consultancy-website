@@ -1,7 +1,8 @@
 // Patch 04: asset-backed flags for consistent rendering across Windows browsers.
 export type LanguageItem = { code:string; name:string; english:string; flag:string; flagAsset:string; market:string; available:boolean };
 export const languageCatalog:LanguageItem[] = [
- {code:'en',name:'English',english:'English',flag:'🇬🇧',flagAsset:'/flags/en-gb.svg',market:'Global',available:true},
+ {code:'en',name:'English (India)',english:'Indian English',flag:'🇮🇳',flagAsset:'/flags/hi-in.svg',market:'India',available:true},
+ {code:'en-gb',name:'English (UK)',english:'UK English',flag:'🇬🇧',flagAsset:'/flags/en-gb.svg',market:'United Kingdom',available:true},
  {code:'hi',name:'हिन्दी',english:'Hindi',flag:'🇮🇳',flagAsset:'/flags/hi-in.svg',market:'India',available:true},
  {code:'ar',name:'العربية',english:'Arabic',flag:'🇸🇦',flagAsset:'/flags/ar-sa.svg',market:'Middle East',available:true},
  {code:'fr',name:'Français',english:'French',flag:'🇫🇷',flagAsset:'/flags/fr-fr.svg',market:'Europe',available:true},

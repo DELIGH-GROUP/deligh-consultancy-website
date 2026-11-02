@@ -24,8 +24,8 @@ test('06.1 image assets are valid local WebP files, no broken placeholders',()=>
 test('06.1 distinct image assignments for important corporate sections',()=>{
  const page=read('src/components/section-page.tsx');
  const expected={
-  services:'analytics',industries:'bridge',work:'meeting',insights:'workshop',
-  'teams-offices':'teamwork',partners:'headquarters',careers:'curved',contact:'lobby'
+  services:'analytics',industries:'bridge',work:'workHero',insights:'insightsHero',
+  'teams-offices':'teamsReceptionHero',partners:'partnersHero',careers:'careersHero',contact:'contactHero'
  };
  for(const [section,asset] of Object.entries(expected)){
   const key=section.includes('-')?`'${section}'`:section;

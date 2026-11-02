@@ -11,7 +11,14 @@ const IMG = {
   analytics: "/images/dc-hd-financial-analytics.webp",
   workshop: "/images/dc-hd-strategy-workshop.webp",
   headquarters: "/images/dc-hd-group-headquarters.webp",
-  teamwork: "/images/dc-hd-collaborative-office.webp"
+  teamwork: "/images/dc-hd-collaborative-office.webp",
+  service1: "/images/dc-generated-service-1.webp",
+  service2: "/images/dc-generated-service-2.webp",
+  service3: "/images/dc-generated-service-3.webp",
+  service4: "/images/dc-generated-service-4.webp",
+  group: "/images/dc-generated-group.webp",
+  hero: "/images/dc-generated-hero.webp",
+  meeting2: "/images/dc-hd-collaborative-office.webp"
 } as const;
 
 const featured = [
@@ -21,25 +28,9 @@ const featured = [
   { slug: "digital-it-advisory", photo: IMG.workshop }
 ];
 
-const sectorImages = [IMG.bridge, IMG.analytics, IMG.curved, IMG.teamwork];
-const industryCardImages = [
-  IMG.headquarters,
-  IMG.teamwork,
-  IMG.meeting,
-  IMG.lobby,
-  IMG.analytics,
-  IMG.workshop,
-  IMG.curved,
-  IMG.bridge
-];
-const capsulePhotos = [
-  IMG.lobby,
-  IMG.headquarters,
-  IMG.curved,
-  IMG.meeting,
-  IMG.analytics,
-  IMG.teamwork
-];
+const sectorImages = [IMG.bridge, IMG.service2, IMG.service3, IMG.teamwork];
+const industryCardImages = [IMG.group, IMG.teamwork, IMG.meeting2, IMG.lobby, IMG.analytics, IMG.workshop, IMG.curved, IMG.service4];
+const capsulePhotos = [IMG.lobby, IMG.headquarters, IMG.service1, IMG.meeting2, IMG.analytics, IMG.service4];
 
 export default function Home({ locale }: { locale: Locale }) {
   const href = (path: string) => `/${locale}/${path}`;

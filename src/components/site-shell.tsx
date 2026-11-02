@@ -24,8 +24,8 @@ const consentKey = "dc-consent-v1";
 
 function ChevronDown() { return <svg aria-hidden="true" className="utility-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 const regionLanguageCodes: Record<string,string[]> = {
-  IN:['en','hi'], GB:['en'], AE:['ar','en'], US:['en','es'], IL:['he','en'], SA:['ar','en'],
-  CA:['en','fr'], AU:['en'], SG:['en','zh','ms','ta'], GL:[]
+  IN:['en','hi'], GB:['en-gb'], AE:['ar','en'], US:['en','es'], IL:['he','en'], SA:['ar','en'],
+  CA:['en','fr'], AU:['en-gb'], SG:['en','zh','ms','ta'], GL:[]
 };
 
 export default function SiteShell({ locale, children }: { locale: Locale; children: React.ReactNode }) {
@@ -47,6 +47,8 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
     try {
       const savedRegion = localStorage.getItem("dc-region");
       if (savedRegion && regions.some(r => r.code === savedRegion)) setRegion(savedRegion);
+      else if (locale === "en-gb") setRegion("GB");
+      else if (locale === "en" || locale === "hi") setRegion("IN");
       const savedConsent = localStorage.getItem(consentKey);
       if (savedConsent) {
         const parsed: Consent = JSON.parse(savedConsent);
@@ -58,7 +60,7 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = locale;
+    document.documentElement.lang = locale === "en-gb" ? "en-GB" : locale === "en" ? "en-IN" : locale;
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
   }, [locale]);
 
@@ -154,7 +156,7 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
                 <span className="language-status" aria-hidden="true">{l.code===locale?'✓':(!l.available?'Soon':'')}</span>
               </button>)}
             </div></div>
-            <div className="language-panel-foot">{t({en:'Language options are filtered to your chosen region. Seven verified language editions are selectable globally; remaining translations are in preparation.',hi:'आपके चुने हुए क्षेत्र के अनुसार भाषाएँ दिखती हैं। अभी सात भाषाएँ उपलब्ध हैं; बाकी भाषाओं के अनुवाद तैयार किए जा रहे हैं।',ar:'تُعرض اللغات بحسب المنطقة المختارة. تتوفر سبع نسخ لغوية حالياً، وتجري مراجعة الترجمات الأخرى.'},locale)}</div>
+            <div className="language-panel-foot">{t({en:'Language options are filtered to your chosen region. Eight verified language editions are selectable globally; remaining translations are in preparation.',hi:'चुने हुए क्षेत्र के अनुसार भाषाएँ दिखती हैं। सात भाषाओं के आठ संस्करण उपलब्ध हैं; बाकी भाषाओं के अनुवाद तैयार किए जा रहे हैं।',ar:'تُعرض اللغات بحسب المنطقة المختارة. تتوفر ثماني نسخ لسبع لغات حالياً، وتجري مراجعة الترجمات الأخرى.'},locale)}</div>
           </div>}
         </div>
       </div>

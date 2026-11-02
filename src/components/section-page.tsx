@@ -6,7 +6,6 @@ import { Arrow } from './arrow';
 import AboutPage from './about-page';
 
 const copy = (en: string, hi: string, ar: string): Copy => ({ en, hi, ar });
-const officeCities = ['Prayagraj', 'Delhi', 'Lucknow', 'Hyderabad', 'Pune'];
 const IMG = {
   curved: '/images/dc-hd-curved-glass.webp',
   lobby: '/images/dc-hd-reception-lobby.webp',
@@ -15,23 +14,41 @@ const IMG = {
   analytics: '/images/dc-hd-financial-analytics.webp',
   workshop: '/images/dc-hd-strategy-workshop.webp',
   headquarters: '/images/dc-hd-group-headquarters.webp',
-  teamwork: '/images/dc-hd-collaborative-office.webp'
+  teamwork: '/images/dc-hd-collaborative-office.webp',
+  service1: '/images/dc-generated-service-1.webp',
+  service2: '/images/dc-generated-service-2.webp',
+  service3: '/images/dc-generated-service-3.webp',
+  service4: '/images/dc-generated-service-4.webp',
+  group: '/images/dc-generated-group.webp',
+  hero: '/images/dc-generated-hero.webp',
+  meeting2: '/images/dc-hd-collaborative-office.webp',
+  prayagraj: '/images/dc-city-prayagraj.webp',
+  delhi: '/images/dc-city-delhi.webp',
+  lucknow: '/images/dc-city-lucknow.webp',
+  hyderabad: '/images/dc-city-hyderabad.webp',
+  pune: '/images/dc-city-pune.webp',
+  workHero: '/images/dc-hero-work.webp',
+  insightsHero: '/images/dc-hero-insights.webp',
+  partnersHero: '/images/dc-hero-partners.webp',
+  careersHero: '/images/dc-hero-careers.webp',
+  contactHero: '/images/dc-hero-contact.webp',
+  teamsReceptionHero: '/images/dc-hero-teams-reception.webp'
 } as const;
-const servicePhotos = [IMG.meeting, IMG.analytics, IMG.bridge, IMG.workshop, IMG.curved, IMG.lobby];
-const serviceMiniPhotos = [IMG.headquarters, IMG.curved, IMG.bridge, IMG.teamwork, IMG.analytics, IMG.meeting, IMG.workshop, IMG.lobby, IMG.headquarters];
-const industryPhotos = [IMG.bridge, IMG.analytics, IMG.curved, IMG.teamwork, IMG.headquarters, IMG.lobby];
-const industryMiniPhotos = [IMG.workshop, IMG.meeting, IMG.curved, IMG.headquarters, IMG.teamwork, IMG.lobby];
+const servicePhotos = [IMG.meeting, IMG.analytics, IMG.bridge, IMG.workshop, IMG.service1, IMG.lobby];
+const serviceMiniPhotos = [IMG.group, IMG.curved, IMG.bridge, IMG.teamwork, IMG.analytics, IMG.meeting2, IMG.workshop, IMG.lobby, IMG.service3];
+const industryPhotos = [IMG.bridge, IMG.analytics, IMG.curved, IMG.teamwork, IMG.service2, IMG.lobby];
+const industryMiniPhotos = [IMG.workshop, IMG.meeting2, IMG.service4, IMG.group, IMG.teamwork, IMG.service1];
 const picture = (id: string) => `linear-gradient(0deg,rgba(3,20,37,.76),rgba(3,20,37,.04) 78%),url('${id}')`;
 const pageHeroImages: Record<string, string> = {
   services: IMG.analytics,
   industries: IMG.bridge,
   privacy: IMG.teamwork,
-  'teams-offices': IMG.teamwork,
-  work: IMG.meeting,
-  insights: IMG.workshop,
-  partners: IMG.headquarters,
-  careers: IMG.curved,
-  contact: IMG.lobby
+  'teams-offices': IMG.teamsReceptionHero,
+  work: IMG.workHero,
+  insights: IMG.insightsHero,
+  partners: IMG.partnersHero,
+  careers: IMG.careersHero,
+  contact: IMG.contactHero
 };
 
 const serviceExplanations = [
@@ -53,6 +70,22 @@ const industrySummaries = [
   copy('Agricultural value chains, food systems and market access.', 'कृषि मूल्य शृंखला, खाद्य प्रणालियाँ और बाजार पहुँच।', 'سلاسل القيمة الزراعية والأنظمة الغذائية والوصول للأسواق.'),
   copy('Asset strategy, development structuring and occupancy planning.', 'परिसंपत्ति रणनीति, विकास संरचना और उपयोग योजना।', 'استراتيجية الأصول وهيكلة التطوير وتخطيط الإشغال.'),
   copy('Public-service programmes, governance and delivery coordination.', 'लोकसेवा कार्यक्रम, शासन और कार्यान्वयन समन्वय।', 'برامج الخدمات العامة والحوكمة وتنسيق التنفيذ.')
+];
+
+const officeCards = [
+  { city: 'Prayagraj', status: copy('Proposed headquarters', 'प्रस्तावित मुख्यालय', 'المقر الرئيسي المقترح'), image: IMG.prayagraj },
+  { city: 'Delhi', status: copy('Planned regional presence', 'प्रस्तावित क्षेत्रीय उपस्थिति', 'حضور إقليمي مخطط له'), image: IMG.delhi },
+  { city: 'Lucknow', status: copy('Planned regional presence', 'प्रस्तावित क्षेत्रीय उपस्थिति', 'حضور إقليمي مخطط له'), image: IMG.lucknow },
+  { city: 'Hyderabad', status: copy('Planned regional presence', 'प्रस्तावित क्षेत्रीय उपस्थिति', 'حضور إقليمي مخطط له'), image: IMG.hyderabad },
+  { city: 'Pune', status: copy('Planned regional presence', 'प्रस्तावित क्षेत्रीय उपस्थिति', 'حضور إقليمي مخطط له'), image: IMG.pune }
+];
+const partnerCards = [
+  { title: copy('Technology & engineering', 'तकनीक और इंजीनियरिंग', 'التقنية والهندسة'), image: IMG.group },
+  { title: copy('Finance & corporate services', 'वित्त और कॉर्पोरेट सेवाएँ', 'الخدمات المالية والمؤسسية'), image: IMG.service1 },
+  { title: copy('Infrastructure & EPCM', 'अवसंरचना और EPCM', 'البنية التحتية وإدارة المشاريع'), image: IMG.bridge },
+  { title: copy('Certification & regulatory coordination', 'प्रमाणन और नियामकीय समन्वय', 'تنسيق الشهادات والامتثال'), image: IMG.lobby },
+  { title: copy('Education & international services', 'शिक्षा और अंतरराष्ट्रीय सेवाएँ', 'التعليم والخدمات الدولية'), image: IMG.meeting2 },
+  { title: copy('Independent domain specialists', 'स्वतंत्र क्षेत्र विशेषज्ञ', 'خبراء مستقلون'), image: IMG.service4 }
 ];
 
 function VisualHero({ locale, kicker, title, lead, image }: { locale: Locale; kicker: Copy; title: Copy; lead: Copy; image: string }) {
@@ -111,15 +144,8 @@ export default function SectionPage({ locale, section }: { locale: Locale; secti
         copy('Operational systems for modern institutions', 'modern institutions के लिए operational systems', 'الأنظمة التشغيلية للمؤسسات الحديثة'),
         copy('Technology governance beyond implementation', 'implementation से आगे की technology governance', 'حوكمة التقنية بعد التنفيذ')
       ].map((topic, idx) => <article className="transaction-card" key={idx}><h3>{t(topic, locale)}</h3><p>{tr('Insight preview content will be expanded with articles, interviews and sector commentary.', 'insight preview content को articles, interviews और sector commentary से expand किया जाएगा।', 'سيتم توسيع محتوى الرؤى بمقالات ومقابلات وتعليقات قطاعية.')}</p></article>)}</div>}
-      {section === 'teams-offices' && <div className="office-grid">{officeCities.map((city, i) => <div className="office-entry" key={city}><h3>{city}</h3><p>{i === 0 ? tr('Proposed headquarters', 'प्रस्तावित मुख्यालय', 'المقر الرئيسي المقترح') : t(ui.officePlanned, locale)}</p></div>)}</div>}
-      {section === 'partners' && <div className="office-grid">{[
-        copy('Technology & engineering', 'तकनीक और इंजीनियरिंग', 'التقنية والهندسة'),
-        copy('Finance & corporate services', 'वित्त और कॉर्पोरेट सेवाएँ', 'الخدمات المالية والمؤسسية'),
-        copy('Infrastructure & EPCM', 'अवसंरचना और EPCM', 'البنية التحتية وإدارة المشاريع'),
-        copy('Certification & regulatory coordination', 'प्रमाणन और नियामकीय समन्वय', 'تنسيق الشهادات والامتثال'),
-        copy('Education & international services', 'शिक्षा और अंतरराष्ट्रीय सेवाएँ', 'التعليم والخدمات الدولية'),
-        copy('Independent domain specialists', 'स्वतंत्र क्षेत्र विशेषज्ञ', 'خبراء مستقلون'),
-      ].map((p, i) => <div className="office-entry" key={i}><h3>{t(p, locale)}</h3></div>)}</div>}
+      {section === 'teams-offices' && <div className="office-grid office-grid--spaced">{officeCards.map((card) => <article className="office-entry office-entry--media" key={card.city}><div className="office-entry-image" style={{ backgroundImage: `url('${card.image}')` }} /><div className="office-entry-copy"><h3>{card.city}</h3><p>{t(card.status, locale)}</p></div></article>)}</div>}
+      {section === 'partners' && <div className="office-grid office-grid--spaced">{partnerCards.map((card, i) => <article className="office-entry office-entry--media" key={i}><div className="office-entry-image" style={{ backgroundImage: `url('${card.image}')` }} /><div className="office-entry-copy"><h3>{t(card.title, locale)}</h3></div></article>)}</div>}
     </div><aside className="generic-aside"><h3>{t(ui.approachTitle, locale)}</h3><p>{t(ui.approachText, locale)}</p><Link className="inline-arrow" href={`/${locale}/services`}>{t(ui.allServices, locale)} <Arrow /></Link></aside>
     </section>
   </>;

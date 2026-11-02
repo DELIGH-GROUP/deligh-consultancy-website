@@ -1,4 +1,4 @@
-/* Patch 04.1: complete reviewed static locale dictionary for supported languages. */
+/* Patch 08.1: Reviewed translations for regional English editions. */
 export const globalTranslations: Record<string, Record<string,string>> = {
   "fr": {
     "Who We Are": "Qui sommes-nous",
@@ -170,6 +170,7 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Independent perspective. Practical ambition. A wider network of expertise.": "Une vision indépendante. Une ambition concrète. Un réseau élargi d'experts.",
     "Our organisation": "Notre organisation",
     "A multidisciplinary advisory organisation for a changing world.": "Un groupe de conseil multidisciplinaire dans un monde en mutation.",
+    "A multidisciplinary advisory firm for a changing world.": "Un groupe de conseil multidisciplinaire dans un monde en mutation.",
     "DELIGH CONSULTANCY is being developed as the consulting parent within DELIGH GROUP. Our direction is to bring corporate, financial, infrastructure, enterprise, technology and institutional perspectives together in one accountable advisory organisation.": "DELIGH CONSULTANCY se développe comme société mère du conseil au sein du DELIGH GROUP. Nous réunissons les perspectives en stratégie, finance, infrastructure, entreprise, technologie et institutions dans une organisation responsable.",
     "We believe sound advice comes from understanding the full business context, selecting the right specialists, and staying accountable through execution. For each engagement, services and expert capacity are defined before work begins.": "Un bon conseil exige une compréhension globale, les bons spécialistes et une responsabilité constante. Chaque mission dispose d'un périmètre et de ressources définis avant le début des travaux.",
     "Independent judgement": "Un jugement indépendant",
@@ -286,7 +287,10 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Site navigation": "Navigation du site",
     "Let’s move your next decision forward.": "Faisons avancer votre prochaine décision.",
     "Have a business challenge or partnership proposal? Connect directly with our team.": "Vous avez un défi commercial ou une proposition de partenariat ? Contactez directement notre équipe.",
-    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Chaque mission commence par une compréhension de l’activité, un périmètre clairement défini et les spécialistes adaptés pour atteindre des résultats concrets."
+    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Chaque mission commence par une compréhension de l’activité, un périmètre clairement défini et les spécialistes adaptés pour atteindre des résultats concrets.",
+    "English (India)": "Anglais (Inde)",
+    "English (UK)": "Anglais (Royaume-Uni)",
+    "Language options are filtered to your chosen region. Eight verified language editions are selectable globally; remaining translations are in preparation.": "Les langues sont filtrées selon la région choisie. Huit versions linguistiques vérifiées sont disponibles à l’échelle mondiale ; les autres traductions sont en préparation."
   },
   "de": {
     "Who We Are": "Über uns",
@@ -458,6 +462,7 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Independent perspective. Practical ambition. A wider network of expertise.": "Unabhängige Perspektive. Praktischer Anspruch. Ein breites Expertennetzwerk.",
     "Our organisation": "Unsere Organisation",
     "A multidisciplinary advisory organisation for a changing world.": "Eine multidisziplinäre Beratungsorganisation für eine Welt im Wandel.",
+    "A multidisciplinary advisory firm for a changing world.": "Eine multidisziplinäre Beratungsorganisation für eine Welt im Wandel.",
     "DELIGH CONSULTANCY is being developed as the consulting parent within DELIGH GROUP. Our direction is to bring corporate, financial, infrastructure, enterprise, technology and institutional perspectives together in one accountable advisory organisation.": "DELIGH CONSULTANCY entsteht als Beratungsmutter der DELIGH GROUP. Unser Ziel ist es, Unternehmens-, Finanz-, Infrastruktur-, Technologie- und Bildungskompetenzen in einer verantwortlichen Organisation zu verbinden.",
     "We believe sound advice comes from understanding the full business context, selecting the right specialists, and staying accountable through execution. For each engagement, services and expert capacity are defined before work begins.": "Gute Beratung erfordert Gesamtverständnis, passende Experten und Verantwortung bis zur Umsetzung. Umfang und Kapazität werden vor Projektbeginn geklärt.",
     "Independent judgement": "Unabhängiges Urteil",
@@ -574,7 +579,10 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Site navigation": "Seitennavigation",
     "Let’s move your next decision forward.": "Bringen wir Ihre nächste Entscheidung voran.",
     "Have a business challenge or partnership proposal? Connect directly with our team.": "Haben Sie eine geschäftliche Herausforderung oder einen Partnerschaftsvorschlag? Kontaktieren Sie unser Team direkt.",
-    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Jeder Auftrag beginnt mit einem Verständnis des Geschäfts, einem klar definierten Leistungsumfang und den passenden Spezialisten für praktische Ergebnisse."
+    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Jeder Auftrag beginnt mit einem Verständnis des Geschäfts, einem klar definierten Leistungsumfang und den passenden Spezialisten für praktische Ergebnisse.",
+    "English (India)": "Englisch (Indien)",
+    "English (UK)": "Englisch (Vereinigtes Königreich)",
+    "Language options are filtered to your chosen region. Eight verified language editions are selectable globally; remaining translations are in preparation.": "Die Sprachauswahl wird nach Ihrer Region gefiltert. Weltweit stehen acht geprüfte Sprachversionen zur Verfügung; weitere Übersetzungen sind in Vorbereitung."
   },
   "es": {
     "Who We Are": "Quiénes somos",
@@ -746,6 +754,7 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Independent perspective. Practical ambition. A wider network of expertise.": "Visión independiente. Ambición práctica. Una red amplia de expertos.",
     "Our organisation": "Nuestra organización",
     "A multidisciplinary advisory organisation for a changing world.": "Una organización de asesoría multidisciplinar para un mundo cambiante.",
+    "A multidisciplinary advisory firm for a changing world.": "Una organización de asesoría multidisciplinar para un mundo cambiante.",
     "DELIGH CONSULTANCY is being developed as the consulting parent within DELIGH GROUP. Our direction is to bring corporate, financial, infrastructure, enterprise, technology and institutional perspectives together in one accountable advisory organisation.": "DELIGH CONSULTANCY se desarrolla como matriz de asesoría del DELIGH GROUP. Integramos perspectivas corporativas, financieras, de infraestructura, tecnología y educación en una organización responsable.",
     "We believe sound advice comes from understanding the full business context, selecting the right specialists, and staying accountable through execution. For each engagement, services and expert capacity are defined before work begins.": "Una buena asesoría requiere entender el contexto, elegir expertos y responder por la ejecución. El alcance y la capacidad se definen antes de cada proyecto.",
     "Independent judgement": "Criterio independiente",
@@ -862,7 +871,10 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Site navigation": "Navegación del sitio",
     "Let’s move your next decision forward.": "Impulsemos su próxima decisión.",
     "Have a business challenge or partnership proposal? Connect directly with our team.": "¿Tiene un reto empresarial o una propuesta de colaboración? Contacte directamente con nuestro equipo.",
-    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Cada proyecto comienza por comprender el negocio, definir claramente el alcance y reunir a los especialistas adecuados para lograr resultados prácticos."
+    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Cada proyecto comienza por comprender el negocio, definir claramente el alcance y reunir a los especialistas adecuados para lograr resultados prácticos.",
+    "English (India)": "Inglés (India)",
+    "English (UK)": "Inglés (Reino Unido)",
+    "Language options are filtered to your chosen region. Eight verified language editions are selectable globally; remaining translations are in preparation.": "Las opciones de idioma se filtran por la región elegida. Hay ocho versiones lingüísticas verificadas disponibles globalmente; las demás traducciones están en preparación."
   },
   "pt": {
     "Who We Are": "Quem somos",
@@ -1034,6 +1046,7 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Independent perspective. Practical ambition. A wider network of expertise.": "Perspectiva independente. Ambição prática. Uma rede ampla de especialistas.",
     "Our organisation": "Nossa organização",
     "A multidisciplinary advisory organisation for a changing world.": "Uma organização de consultoria multidisciplinar para um mundo em transformação.",
+    "A multidisciplinary advisory firm for a changing world.": "Uma organização de consultoria multidisciplinar para um mundo em transformação.",
     "DELIGH CONSULTANCY is being developed as the consulting parent within DELIGH GROUP. Our direction is to bring corporate, financial, infrastructure, enterprise, technology and institutional perspectives together in one accountable advisory organisation.": "DELIGH CONSULTANCY está sendo desenvolvida como empresa-mãe de consultoria do DELIGH GROUP. Reunimos perspectivas corporativas, financeiras, de infraestrutura, tecnologia e instituições em uma organização responsável.",
     "We believe sound advice comes from understanding the full business context, selecting the right specialists, and staying accountable through execution. For each engagement, services and expert capacity are defined before work begins.": "Uma boa consultoria exige contexto, especialistas certos e responsabilidade na execução. Escopo e capacidade são definidos antes do trabalho.",
     "Independent judgement": "Julgamento independente",
@@ -1150,6 +1163,9 @@ export const globalTranslations: Record<string, Record<string,string>> = {
     "Site navigation": "Navegação do site",
     "Let’s move your next decision forward.": "Vamos dar o próximo passo na sua decisão.",
     "Have a business challenge or partnership proposal? Connect directly with our team.": "Tem um desafio empresarial ou uma proposta de parceria? Entre em contacto diretamente com a nossa equipa.",
-    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Cada projeto começa com a compreensão do negócio, um âmbito claramente definido e os especialistas certos para alcançar resultados práticos."
+    "Each engagement begins with an understanding of the business, a clearly defined scope, and the right specialists working towards practical outcomes.": "Cada projeto começa com a compreensão do negócio, um âmbito claramente definido e os especialistas certos para alcançar resultados práticos.",
+    "English (India)": "Inglês (Índia)",
+    "English (UK)": "Inglês (Reino Unido)",
+    "Language options are filtered to your chosen region. Eight verified language editions are selectable globally; remaining translations are in preparation.": "As opções de idioma são filtradas pela região escolhida. Oito versões linguísticas verificadas estão disponíveis globalmente; as restantes traduções estão em preparação."
   }
 };

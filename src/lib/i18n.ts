@@ -1,11 +1,12 @@
 import { globalTranslations } from "./global-translations";
-export const locales = ["en", "hi", "ar", "fr", "de", "es", "pt"] as const;
+export const locales = ["en", "en-gb", "hi", "ar", "fr", "de", "es", "pt"] as const;
 export type Locale = (typeof locales)[number];
 export type Copy = { en: string; hi: string; ar: string };
 export const isLocale = (value: string): value is Locale => locales.includes(value as Locale);
-export const localeLabel: Record<Locale, string> = { en: "English", hi: "हिन्दी", ar: "العربية", fr:"Français", de:"Deutsch", es:"Español", pt:"Português" };
+export const localeLabel: Record<Locale, string> = { en: "English (India)", "en-gb": "English (UK)", hi: "हिन्दी", ar: "العربية", fr:"Français", de:"Deutsch", es:"Español", pt:"Português" };
 export const t = (copy: Copy, locale: Locale): string => {
   if (locale === "en" || locale === "hi" || locale === "ar") return copy[locale];
+  if (locale === "en-gb") return copy.en;
   return globalTranslations[locale]?.[copy.en] ?? copy.en;
 };
 
