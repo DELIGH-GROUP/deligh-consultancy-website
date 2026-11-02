@@ -30,10 +30,18 @@ test('Patch03 does not claim an illustrated DELIGH GROUP building is a real offi
  assert.match(about,/ITSDELIGH PRIVATE LIMITED/);
  assert.match(about,/DELIGH CONSULTANCY/);
 });
-test('Patch03 directory and team sections use distinct locally generated imagery',()=>{
- const s=read('src/components/section-page.tsx');
- assert.match(s,/dc-generated-service-1.webp/);
- assert.match(s,/dc-generated-meeting.webp/);
+test('Directory, team, and work pages retain distinct locally bundled imagery',()=>{
+ const source=read('src/components/section-page.tsx');
  const style=read('src/styles/globals.css');
+ // Current HD assets supersede the older dc-generated-service-* names.
+ assert.match(source,/meeting:\s*'\/images\/dc-hd-executive-meeting\.webp'/);
+ assert.match(source,/teamwork:\s*'\/images\/dc-hd-collaborative-office\.webp'/);
+ assert.match(source,/work:\s*IMG\.meeting/);
+ assert.match(source,/'teams-offices':\s*IMG\.teamwork/);
+ assert.match(source,/servicePhotos\s*=\s*\[IMG\.meeting,\s*IMG\.analytics,\s*IMG\.bridge/);
  assert.match(style,/\.teams-visual-photo/);
+ for (const file of ['dc-hd-executive-meeting.webp','dc-hd-collaborative-office.webp','dc-hd-financial-analytics.webp']) {
+   const path='public/images/'+file;
+   assert.ok(fs.statSync(path).size > 100000, `${path} must be an actual local HD asset`);
+ }
 });

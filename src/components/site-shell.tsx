@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { type Locale, localeLabel, navItems, t, ui } from "@/lib/i18n";
 import { Arrow } from "./arrow";
 import { languageCatalog } from "@/lib/language-catalog";
+import RevealMotion from "./reveal-motion";
 
 const regions = [
   { code: "IN", name: {en:"India",hi:"भारत",ar:"الهند"} }, { code: "GB", name: {en:"United Kingdom",hi:"यूनाइटेड किंगडम",ar:"المملكة المتحدة"} },
@@ -21,10 +22,17 @@ const regions = [
 type Consent = { essential: true; analytics: boolean; marketing: boolean; version: 1; savedAt: string };
 const consentKey = "dc-consent-v1";
 
+function ChevronDown() { return <svg aria-hidden="true" className="utility-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
+const regionLanguageCodes: Record<string,string[]> = {
+  IN:['en','hi'], GB:['en'], AE:['ar','en'], US:['en','es'], IL:['he','en'], SA:['ar','en'],
+  CA:['en','fr'], AU:['en'], SG:['en','zh','ms','ta'], GL:[]
+};
+
 export default function SiteShell({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const languageBoxRef = useRef<HTMLDivElement | null>(null);
+  const drawerCloseRef = useRef<HTMLButtonElement | null>(null);
   const [menu, setMenu] = useState(false);
   const [region, setRegion] = useState("GL");
   const [cookieDialog, setCookieDialog] = useState(false);
@@ -56,7 +64,9 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
 
   useEffect(() => { setMenu(false); setLanguageOpen(false); }, [pathname]);
   useEffect(() => {
-    const close = (e: KeyboardEvent) => { if (e.key === "Escape") setLanguageOpen(false); };
+    const close = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setLanguageOpen(false); setMenu(false); }
+    };
     const clickOutside = (e: MouseEvent) => {
       if (languageBoxRef.current && !languageBoxRef.current.contains(e.target as Node)) setLanguageOpen(false);
     };
@@ -71,6 +81,25 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (!menu) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    drawerCloseRef.current?.focus();
+    const trapFocus=(e:KeyboardEvent)=>{
+      if(e.key!=='Tab') return;
+      const drawer=document.getElementById('mobile-nav');
+      if(!drawer) return;
+      const items=Array.from(drawer.querySelectorAll<HTMLElement>('a,button:not([disabled])'));
+      if(!items.length) return;
+      const first=items[0],last=items[items.length-1];
+      if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
+    };
+    document.addEventListener('keydown',trapFocus);
+    return ()=>{document.body.style.overflow=previousOverflow;document.removeEventListener('keydown',trapFocus);};
+  },[menu]);
 
   const switchLocale = (next: Locale) => {
     const updated = pathname.replace(/^\/[^/]+(?=\/|$)/, `/${next}`);
@@ -91,13 +120,17 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
 
   const link = (slug: string) => `/${locale}/${slug}`;
   const currentLanguage = useMemo(() => languageCatalog.find(l => l.code === locale) ?? languageCatalog[0], [locale]);
-  const filteredLanguages = useMemo(() => languageCatalog.filter(l => (l.name + ' ' + l.english + ' ' + l.market).toLowerCase().includes(languageQuery.toLowerCase().trim())), [languageQuery]);
+  const filteredLanguages = useMemo(() => {
+    const scope = regionLanguageCodes[region] ?? [];
+    return languageCatalog.filter(l => (region === 'GL' || scope.includes(l.code)) &&
+      (l.name + ' ' + l.english + ' ' + l.market).toLowerCase().includes(languageQuery.toLowerCase().trim()));
+  }, [languageQuery,region]);
 
   return <div lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} className="website-shell">
     <a className="skip-link" href="#main">{t({en:"Skip to content",hi:"मुख्य सामग्री पर जाएँ",ar:"انتقل إلى المحتوى"},locale)}</a>
 
     <div className="utility-bar"><div className="container utility-inner">
-      <span className="utility-group">◈ &nbsp; {t(ui.group, locale)}</span>
+      <div className="group-marquee" aria-label={t(ui.group,locale)}><span className="group-marquee-track" aria-hidden="true"><span>◆ &nbsp; {t(ui.group,locale)}</span><span>◆ &nbsp; {t(ui.group,locale)}</span></span></div>
       <div className="utility-tools">
         <label className="tool-label"><span>{t(ui.region, locale)}</span>
           <select aria-label={t(ui.region, locale)} value={region} onChange={e => selectRegion(e.target.value)}>
@@ -109,7 +142,7 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
           <button type="button" className="language-trigger" aria-expanded={languageOpen} aria-controls="global-language-panel" onClick={() => setLanguageOpen(v => !v)}>
             <span>{t(ui.language,locale)}</span>
             <strong className="trigger-language"><img className="flag-icon" src={currentLanguage.flagAsset} alt="" aria-hidden="true" />{localeLabel[locale]}</strong>
-            <span aria-hidden="true">⌄</span>
+            <ChevronDown/>
           </button>
           {languageOpen && <div className="language-panel" id="global-language-panel" role="region" aria-label={t({en:'Choose website language',hi:'वेबसाइट की भाषा चुनें',ar:'اختر لغة الموقع'},locale)}>
             <div className="language-panel-head"><strong>{t({en:'Select language',hi:'भाषा चुनें',ar:'اختر اللغة'},locale)}</strong><button type="button" aria-label={t(ui.close,locale)} onClick={() => setLanguageOpen(false)}>×</button></div>
@@ -121,7 +154,7 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
                 <span className="language-status" aria-hidden="true">{l.code===locale?'✓':(!l.available?'Soon':'')}</span>
               </button>)}
             </div></div>
-            <div className="language-panel-foot">{t({en:'Major global and Indian languages are listed here. Complete site translations are currently active for English, Hindi, Arabic, French, German, Spanish and Portuguese; additional language builds will follow in upcoming patches.',hi:'यहाँ प्रमुख वैश्विक और भारतीय भाषाएँ सूचीबद्ध हैं। अभी English, Hindi, Arabic, French, German, Spanish और Portuguese पूर्ण रूप से सक्रिय हैं; अन्य भाषाओं के पूर्ण संस्करण अगले patches में जोड़े जाएंगे।',ar:'تظهر هنا اللغات العالمية والهندية الرئيسية. الترجمات الكاملة للموقع متاحة حالياً بالإنجليزية والهندية والعربية والفرنسية والألمانية والإسبانية والبرتغالية، وسيتم إضافة اللغات الأخرى في ترقيات لاحقة.'},locale)}</div>
+            <div className="language-panel-foot">{t({en:'Language options are filtered to your chosen region. Seven verified language editions are selectable globally; remaining translations are in preparation.',hi:'आपके चुने हुए क्षेत्र के अनुसार भाषाएँ दिखती हैं। अभी सात भाषाएँ उपलब्ध हैं; बाकी भाषाओं के अनुवाद तैयार किए जा रहे हैं।',ar:'تُعرض اللغات بحسب المنطقة المختارة. تتوفر سبع نسخ لغوية حالياً، وتجري مراجعة الترجمات الأخرى.'},locale)}</div>
           </div>}
         </div>
       </div>
@@ -140,11 +173,27 @@ export default function SiteShell({ locale, children }: { locale: Locale; childr
       </button>
     </div></header>
 
-    {menu && <div className="mobile-navigation" id="mobile-nav"><nav className="container" aria-label={t({en:"Mobile navigation",hi:"मोबाइल नेविगेशन",ar:"قائمة الهاتف"},locale)}>
-      {navItems.map(item => <Link key={item.slug} href={link(item.slug)} onClick={() => setMenu(false)}>{t(item.label,locale)} <Arrow /></Link>)}
-    </nav></div>}
+    {menu && <div className="mobile-overlay" role="presentation">
+      <button type="button" className="mobile-scrim" onClick={() => setMenu(false)} aria-label={t(ui.close,locale)} />
+      <div className="mobile-navigation" id="mobile-nav" role="dialog" aria-modal="true" aria-label={t({en:'Site navigation',hi:'वेबसाइट नेविगेशन',ar:'التنقل في الموقع'},locale)}>
+        <div className="mobile-nav-heading"><Link className="brand" href={`/${locale}`} onClick={() => setMenu(false)}><span className="brand-mark">DC</span><span className="brand-text"><strong>DELIGH</strong><span>CONSULTANCY</span></span></Link><button ref={drawerCloseRef} type="button" className="mobile-close" onClick={() => setMenu(false)} aria-label={t(ui.close,locale)}>×</button></div>
+        <nav className="mobile-nav-links" aria-label={t({en:'Mobile navigation',hi:'मोबाइल नेविगेशन',ar:'قائمة الهاتف'},locale)}>
+          {navItems.map((item,index) => <Link style={{animationDelay:`${index * 38}ms`}} key={item.slug} href={link(item.slug)} onClick={() => setMenu(false)}>{t(item.label,locale)} <Arrow /></Link>)}
+        </nav>
+        <div className="mobile-nav-bottom"><span>DELIGH GROUP</span><a href="mailto:reachus@deligh.org">reachus@deligh.org <Arrow/></a></div>
+      </div>
+    </div>}
 
     <main id="main">{children}</main>
+    <RevealMotion/>
+
+    <section className="site-contact-cta" aria-labelledby="site-contact-title">
+      <div className="container site-contact-inner"><div><p className="contact-cta-eyebrow">DELIGH CONSULTANCY</p>
+        <h2 id="site-contact-title">{t({en:'Let’s move your next decision forward.',hi:'अगले निर्णय की ओर साथ बढ़ें।',ar:'لنمضِ معاً نحو قرارك القادم.'},locale)}</h2>
+        <p>{t({en:'Have a business challenge or partnership proposal? Connect directly with our team.',hi:'कोई व्यावसायिक चुनौती या साझेदारी का प्रस्ताव है? हमारी टीम से सीधे संपर्क करें।',ar:'هل لديك تحدٍّ تجاري أو اقتراح شراكة؟ تواصل مباشرة مع فريقنا.'},locale)}</p></div>
+        <a className="site-contact-button" href="mailto:reachus@deligh.org?subject=DELIGH%20CONSULTANCY%20Enquiry">reachus@deligh.org <Arrow/></a>
+      </div>
+    </section>
 
     <footer className="footer">
       <div className="container footer-primary">
